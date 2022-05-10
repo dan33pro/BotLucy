@@ -1,0 +1,53 @@
+header {
+    height: min-content;
+}
+
+main {
+    grid-template-columns: minmax(600px, auto) auto;
+    grid-auto-rows: 1fr;
+}
+
+.right-aside-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right-aside {
+    margin: 0 auto;
+    width: min-content;
+    max-height: 700px;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+    background-image: none;
+}
+
+html #group {
+    margin-top: 0px;
+    padding: 30px 0 0;
+    background-color: rgb(227, 246, 252);
+    border-top: 1px solid rgb(18, 2, 110);
+    border-bottom: 60px solid rgb(18, 2, 110);
+}
+
+#group h2 {
+    color: rgb(18, 2, 110);
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(134, 125, 184);
+}
+
+#group li {
+    background-color: white;
+}
+
+
+@media (min-width: 1800px) {
+    main {
+        max-width: 1800px;
+        grid-template-columns: 1fr 1fr;
+    }
+}

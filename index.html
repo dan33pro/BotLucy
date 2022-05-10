@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Amazon Lex for JavaScript - Sample Application (BookTrip)</title>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.41.0.min.js"></script>
+	<link rel="stylesheet" href="./css/mobile.css">
+	<link rel="stylesheet" href="./css/style.css" media="(min-width: 1100px)">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<img src="./img/logo-upc.png" alt="Logo UPC" class="logo">
+			<a href="#group">
+				<img src="./img/grupo-de-chat.png" alt="Icono grupo de personas">
+			</a>
+		</nav>
+	</header>
+	<main>
+		<section class="principal-section">
+			<article class="info-project">
+				<h1 class="principal-title">Proyecto Infraestructura</h1>
+				<p>Este proyecto tiene la intención de funcionar como una herramienta informativa, en la nuestros
+					usuarios
+					pueden consultar los diferentes servicios de AWS, para saber que necesidad cubren.</p>
+			</article>
+			<div class="cards-container">
+				<div class="service-card">
+					<img src="./icon/Lex.svg" alt="Icono Amazon Lex">
+					<h3>Amazon Lex</h3>
+					<p>Este es el servicio principal de nuestro proyecto, con el estructuramos el funcionamiento basico
+						del bot.</p>
+				</div>
+				<div class="service-card">
+					<img src="./icon/Kendra.svg" alt="Icono Amazon Kendra">
+					<h3>Amazon Kendra</h3>
+					<p>Este servico lo aplicamos para potenciar las funciones del bot, con el nos permitimos buscar
+						preguntas y sus respectivas respuestas, en una serie de documentos indexsados.</p>
+				</div>
+				<div class="service-card">
+					<img src="./icon/S3.svg" alt="Icono Amazon S3">
+					<h3>Amazon S3</h3>
+					<p>Con este servicio creamos un bucket donde almacenamos documentos, los cuales son sincronisados y
+						indexsados en el servicio anterior.</p>
+				</div>
+				<div class="service-card">
+					<img src="./icon/EC2.svg" alt="Icono Amazon EC2">
+					<h3>Amazon EC2</h3>
+					<p>En este servicio creamos un MV donde montamos un servidor web, con la estructura Front-end del
+						proyecto.</p>
+				</div>
+				<div class="service-card">
+					<img src="./icon/Cognitivo.svg" alt="Icono Amazon Cognitivo">
+					<h3>Amazon Cognitivo</h3>
+					<p>Con este servicio creamos un grupo de identidades, con el cual los usuarios podran consumir los
+						servicios anteriormente mencionados en nuestro nombre, a traves de nuestro proyecto.</p>
+				</div>
+				<div class="service-card">
+					<img src="./icon/IAM.svg" alt="Icono Amazon IAM">
+					<h3>Amazon IAM</h3>
+					<p>Con este servicio gestionamos las politicas asociadas a nuestro grupo de identidades, es decir
+						los permisos que se tiene para consumir servicios en nuestro nombre.</p>
+				</div>
+			</div>
+		</section>
+		<div class="right-aside-container">
+			<aside class="right-aside">
+				<div class="info">
+					<h1 class="title">Agent Assist Lex</h1>
+					<p class="test">
+						Este Bot brinda información sobre los servicios de AWS.
+					</p>
+				</div>
+				<div>
+					<section class="conversation-container">
+						<div class="header-conversation">
+							<p>Bot: Lucy</p>
+							<picture>
+							</picture>
+						</div>
+						<div id="conversation">
+						</div>
+					</section>
+					<form id="chatform" onsubmit="return pushChat();">
+						<input type="text" id="wisdom" size="80" value="" placeholder="Pregunta por los servicios de AWS">
+					</form>
+				</div>
+		</div>
+		</aside>
+	</main>
+	<footer id="group">
+		<h2 class="principal-title footer-title">Integrantes</h2>
+		<ul class="integrantes">
+			<li>
+				<img src="./img/Daniel.png" alt="Icono Daniel">
+				<p>Daniel Cespedes</p>
+			</li>
+			<li>
+				<img src="./img/John.png" alt="Icono John">
+				<p>John Calderon</p>
+			</li>
+			<li>
+				<img src="./img/Frankin.png" alt="Icono Frankin">
+				<p>Frankin Bermudez</p>
+			</li>
+			<li>
+				<img src="./img/Valentina.png" alt="Icono Valentina">
+				<p>Valentina Contreras</p>
+			</li>
+		</ul>
+		<p class="message">Todos los derechos reservados.</p>
+	</footer>
+
+	<script type="text/javascript">
+		// set the focus to the input box
+		document.getElementById("wisdom").focus();
+
+		// Initialize the Amazon Cognito credentials provider
+		AWS.config.region = 'us-west-2'; // Region
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			// Provide your Pool Id here
+			IdentityPoolId: 'us-west-2:160e066d-2c09-4d09-954e-3c0e4f2c66fa',
+		});
+
+		var lexruntime = new AWS.LexRuntime();
+		var lexUserId = 'chatbot-demo' + Date.now();
+		var sessionAttributes = {};
+
+		function pushChat() {
+
+			// if there is text to be sent...
+			var wisdomText = document.getElementById('wisdom');
+			if (wisdomText && wisdomText.value && wisdomText.value.trim().length > 0) {
+
+				// disable input to show we're sending it
+				var wisdom = wisdomText.value.trim();
+				wisdomText.value = '...';
+				wisdomText.locked = true;
+
+				// send it to the Lex runtime
+				var params = {
+					botAlias: '$LATEST',
+					botName: 'AgentAssistBotVOne',
+					inputText: wisdom,
+					userId: lexUserId,
+					sessionAttributes: sessionAttributes
+				};
+				showRequest(wisdom);
+				lexruntime.postText(params, function (err, data) {
+					if (err) {
+						console.log(err, err.stack);
+						showError('Error:  ' + err.message + ' (see console for details)')
+					}
+					if (data) {
+						// capture the sessionAttributes for the next cycle
+						sessionAttributes = data.sessionAttributes;
+						// show response and/or error/dialog status
+						showResponse(data);
+					}
+					// re-enable input
+					wisdomText.value = '';
+					wisdomText.locked = false;
+				});
+			}
+			// we always cancel form submission
+			return false;
+		}
+
+		function showRequest(daText) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var requestPara = document.createElement("P");
+			requestPara.className = 'userRequest';
+			requestPara.appendChild(document.createTextNode(daText));
+			conversationDiv.appendChild(requestPara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+
+		function showError(daText) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var errorPara = document.createElement("P");
+			errorPara.className = 'lexError';
+			errorPara.appendChild(document.createTextNode(daText));
+			conversationDiv.appendChild(errorPara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+
+		function showResponse(lexResponse) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var responsePara = document.createElement("P");
+			responsePara.className = 'lexResponse';
+			if (lexResponse.message) {
+				responsePara.appendChild(document.createTextNode(lexResponse.message));
+				responsePara.appendChild(document.createElement('br'));
+			}
+			if (lexResponse.dialogState === 'ReadyForFulfillment') {
+				responsePara.appendChild(document.createTextNode(
+					'Ready for fulfillment'));
+				// TODO:  show slot values
+			} else {
+				responsePara.appendChild(document.createTextNode(
+					'(' + lexResponse.dialogState + ')'));
+			}
+			conversationDiv.appendChild(responsePara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+	</script>
+</body>
+
+</html>

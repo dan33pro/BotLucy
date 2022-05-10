@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+}
+
+nav {
+    display: flex;
+    place-items: center;
+    padding: 5px 20px;
+    background-color: rgb(18, 2, 110);
+    justify-content: space-between;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.233);
+}
+
+nav .logo {
+    width: 140px;
+    filter: invert();
+}
+
+nav img {
+    width: 50px;
+    filter: invert();
+    cursor: pointer;
+}
+
+main {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.principal-section {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 10px 20px 30px;
+    width: 80%;
+}
+
+.principal-title {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 28px;
+    color: rgb(32, 3, 192);
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.info-project p {
+    font-size: 18px;
+    text-align: justify;
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.cards-container {
+    max-width: 660px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+.service-card {
+    margin: 10px;
+    padding: 10px;
+    place-content: center;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+    border: 1px solid rgb(16, 0, 107);
+}
+
+.service-card img {
+    width: 30px;
+    margin-bottom: 10px;
+}
+
+.service-card h3 {
+    color: rgb(16, 0, 107);
+    font-size: 20px;
+}
+
+.service-card p {
+    display: block;
+    margin: 5px 10px;
+    text-align:justify;
+    font-size: 12px;
+}
+
+.right-aside {
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../img/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right-aside .info {
+    width: min-content;
+    margin: 0 auto;
+    border: 1px solid rgba(42, 6, 248, 0.5);
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.title {
+    display: flex;
+    margin: 0 auto;
+    padding: 10px;
+    width: max-content;
+    color: rgb(32, 3, 192);
+}
+
+.test {
+    display: flex;
+    margin: 0 auto;
+    padding: 10px;
+    width: max-content;
+    max-width: 400px;
+    background-color: rgb(80, 55, 221);
+    color: white;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.conversation-container {
+    margin: 20px auto;
+    overflow: hidden;
+    width: 420px;
+    height: 450px;
+    border: 1px solid rgba(42, 6, 248, 0.5);
+    background-color: white;
+    border-radius: 40px;
+}
+
+#conversation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 380px;
+    padding: 4px;
+    overflow: auto;
+    max-height: 100%;
+    width: 435px;
+    background-color: white;
+}
+
+.header-conversation {
+    display: flex;
+    margin: 20px auto 0;
+    justify-content: space-between;
+    place-items: center;
+    padding: 0 20px;
+    width: 90%;
+    height: 45px;
+    background-color: rgb(80, 55, 221);
+    border-radius: 25px;
+    border: 1px solid rgba(42, 6, 248, 0.5);
+    
+}
+
+.header-conversation p {
+    color: white;
+    font-size: 18px;
+}
+
+.header-conversation picture {
+    background-color: white;
+    background-image: url("../img/robot.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+#wisdom {
+    outline: none;
+    padding: 4px 20px;
+    width: 400px;
+    height: 45px;
+    background-color: rgb(80, 55, 221);
+    border-radius: 25px;
+    border: 1px solid rgba(42, 6, 248, 0.5);
+    color: white;
+}
+
+input::placeholder {
+    color: #ccc;
+    font-style: italic;
+    font-size: 12px;
+}
+
+p.userRequest {
+    display: flex;
+    left: 60px;
+    align-self: flex-start;
+    position: relative;
+    margin: 10px 0;
+    padding: 4px 10px 4px 10px;
+    width: max-content;
+    max-width: 70%;
+    background-color: #7d7;
+    border-radius: 0 8px 8px 8px;
+    box-shadow: 2px 2px 4px rgba(97, 87, 87, 0.5);
+}
+
+p.userRequest::before {
+    position: absolute;
+    content: " ";
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-top: 7px solid #7d7;
+    left: -10px;
+    top: 0px;
+}
+
+p.lexResponse {
+    display: flex;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 60px;
+    position: relative;
+    padding: 4px 10px 4px 10px;
+    width: max-content;
+    max-width: 70%;
+    border-radius: 8px 0 8px 8px;
+    text-align: right;
+    background-color: #bbf;
+    font-style: italic;
+    box-shadow: 2px 2px 4px rgba(97, 87, 87, 0.5);
+}
+
+p.lexResponse::after {
+    position: absolute;
+    content: " ";
+    width: 0px;
+    height: 0px;
+    border-right: 10px solid transparent;
+    border-top: 7px solid #bbf;
+    right: -10px;
+    top: 0px;
+}
+
+p.lexError {
+    margin: 4px;
+    padding: 4px 10px 4px 10px;
+    border-radius: 8px;
+    text-align: right;
+    min-width: 50%;
+    max-width: 85%;
+    float: right;
+    background-color: #f77;
+}
+
+#chatform input {
+    display: flex;
+    border: 1px solid #f77;
+    margin: 0 auto;
+}
+
+#group {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    border-bottom: 60px solid rgb(18, 2, 110);
+}
+
+#group .footer-title {
+    width: max-content;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+#group ul {
+    margin: 40px auto;
+    display: flex;
+    width: 80%;
+    max-width: 800px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style: none;
+}
+
+#group ul li {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: 120px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 4px rgba(97, 95, 95, 0.514);
+    padding: 10px;
+}
+
+#group ul li img {
+    width: 80px;
+}
+
+#group ul li p {
+    color: rgb(16, 0, 107);
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+}
+
+#group .message {
+    position: absolute;
+    right: calc(50% - 100px);
+    bottom: -40px;
+    color: white;
+    text-align: center;
+}
