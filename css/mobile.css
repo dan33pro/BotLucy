@@ -218,7 +218,7 @@ p.userRequest {
     margin: 10px 0;
     padding: 4px 10px 4px 10px;
     width: max-content;
-    max-width: 50vw;
+    max-width: 70%;
     background-color: #7d7;
     border-radius: 0 8px 8px 8px;
     box-shadow: 2px 2px 4px rgba(97, 87, 87, 0.5);
@@ -244,7 +244,7 @@ p.lexResponse {
     position: relative;
     padding: 4px 10px 4px 10px;
     width: max-content;
-    max-width: 50vw;
+    max-width: 70%;
     border-radius: 8px 0 8px 8px;
     text-align: right;
     background-color: #bbf;
@@ -348,6 +348,11 @@ p.lexError {
 
     p.lexResponse {
         align-self:center;
+        max-width: 50vw;
+    }
+
+    p.userRequest {
+        max-width: 50vw;
     }
 
     input#wisdom {
