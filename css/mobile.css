@@ -218,7 +218,7 @@ p.userRequest {
     margin: 10px 0;
     padding: 4px 10px 4px 10px;
     width: max-content;
-    max-width: 70%;
+    max-width: 50vw;
     background-color: #7d7;
     border-radius: 0 8px 8px 8px;
     box-shadow: 2px 2px 4px rgba(97, 87, 87, 0.5);
@@ -244,7 +244,7 @@ p.lexResponse {
     position: relative;
     padding: 4px 10px 4px 10px;
     width: max-content;
-    max-width: 70%;
+    max-width: 50vw;
     border-radius: 8px 0 8px 8px;
     text-align: right;
     background-color: #bbf;
@@ -333,4 +333,43 @@ p.lexError {
     bottom: -40px;
     color: white;
     text-align: center;
+}
+
+@media (max-width: 420px) {
+    .info .test{
+        text-align: center;
+        font-size: 14px;
+        width: 80vw;
+    }
+    .conversation-container {
+        width: 90vw;
+        margin: 10px 0;
+    }
+
+    p.lexResponse {
+        align-self:center;
+    }
+
+    input#wisdom {
+        width: 90vw;
+    }
+}
+
+@media (max-height: 659px) {
+    .right-aside {
+        padding: 0;
+        display: flex;
+        place-content: center;
+        height: 100vh;
+    }
+
+    .conversation-container {
+        margin: 0 auto 20px;
+        height: 70vh;
+    }
+
+    .info {
+        display: none;
+    }
+
 }
